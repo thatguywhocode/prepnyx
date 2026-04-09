@@ -2,6 +2,9 @@ import Fastify from 'fastify';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.routes.js';
+import taskRoutes from "./routes/task.routes.js";
+import progressRoutes from "./routes/progress.routes.js";
+import noteRoutes from "./routes/note.routes.js";
 
 dotenv.config();
 
@@ -10,6 +13,9 @@ const fastify = Fastify({
 });
 
 fastify.register(authRoutes, { prefix: "/api/auth" });
+fastify.register(taskRoutes, { prefix: "/api/tasks" });
+fastify.register(progressRoutes, { prefix: "/api/progress" });
+fastify.register(noteRoutes, { prefix: "/api/notes" });
 
 fastify.get('/', async (request, reply) => {
   return { message: 'Welcome to the PrepNyx API!' };
